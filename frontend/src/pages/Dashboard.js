@@ -96,8 +96,8 @@ function Dashboard() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200">
       {/* NAVBAR */}
-      <div className="bg-white/80 backdrop-blur border-b shadow-sm px-6 py-4 flex justify-between items-center sticky top-0 z-50">
-        <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
+      <div className="bg-white/80 backdrop-blur border-b shadow-sm px-6 py-3 flex justify-between items-center sticky top-0 z-50">
+        <h1 className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
           TaskFlow
         </h1>
 
@@ -105,13 +105,13 @@ function Dashboard() {
           <div className="relative">
             <div
               onClick={() => setShowProfile(!showProfile)}
-              className="w-11 h-11 rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-white flex items-center justify-center font-bold cursor-pointer shadow hover:scale-110 transition-transform duration-200"
+              className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-white flex items-center justify-center font-semibold cursor-pointer shadow hover:scale-105 transition"
             >
               {user.name.charAt(0)}
             </div>
 
             {showProfile && (
-              <div className="absolute right-0 mt-4 w-72 bg-white rounded-2xl shadow-xl border p-4 animate-fade-in">
+              <div className="absolute right-0 mt-3 w-64 bg-white rounded-xl shadow-lg border p-4">
                 <p className="font-semibold text-gray-800">{user.name}</p>
                 <p className="text-sm text-gray-500">{user.email}</p>
 
@@ -126,7 +126,7 @@ function Dashboard() {
 
                 <button
                   onClick={handleLogout}
-                  className="mt-4 w-full bg-gradient-to-r from-rose-500 to-red-600 text-white py-2 rounded-full text-sm font-medium hover:opacity-90 transition"
+                  className="mt-4 w-full bg-rose-500 text-white py-2 rounded-lg text-sm hover:bg-rose-600 transition"
                 >
                   Logout
                 </button>
@@ -137,26 +137,26 @@ function Dashboard() {
       </div>
 
       {/* MAIN */}
-      <div className="max-w-6xl mx-auto px-6 py-10">
+      <div className="max-w-6xl mx-auto px-6 py-6">
         {/* CREATE TASK */}
         <form
           onSubmit={handleCreateTask}
-          className="bg-white rounded-3xl shadow p-10 mb-12 hover:shadow-xl transition"
+          className="bg-white rounded-2xl shadow p-6 mb-8"
         >
-          <h2 className="text-2xl font-semibold mb-6">
+          <h2 className="text-lg font-semibold mb-4">
             Create New Task
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <input
-              className="border rounded-2xl p-4 text-base focus:ring-2 focus:ring-indigo-400 outline-none transition"
+              className="border rounded-xl p-3 text-sm focus:ring-2 focus:ring-indigo-400 outline-none"
               placeholder="Task title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
 
             <input
-              className="border rounded-2xl p-4 text-base focus:ring-2 focus:ring-indigo-400 outline-none transition"
+              className="border rounded-xl p-3 text-sm focus:ring-2 focus:ring-indigo-400 outline-none"
               placeholder="Task description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -165,23 +165,23 @@ function Dashboard() {
 
           <button
             type="submit"
-            className="mt-6 bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-10 py-3 rounded-full font-medium hover:scale-105 transition-transform"
+            className="mt-4 bg-indigo-600 text-white px-6 py-2 rounded-lg text-sm hover:bg-indigo-700 transition"
           >
             Add Task
           </button>
         </form>
 
         {/* SEARCH & FILTER */}
-        <div className="bg-white rounded-3xl shadow p-8 mb-12 flex flex-col md:flex-row gap-6 hover:shadow-lg transition">
+        <div className="bg-white rounded-2xl shadow p-5 mb-8 flex flex-col md:flex-row gap-4">
           <input
-            className="flex-1 border rounded-2xl p-4 focus:ring-2 focus:ring-indigo-400 outline-none transition"
+            className="flex-1 border rounded-xl p-3 text-sm focus:ring-2 focus:ring-indigo-400 outline-none"
             placeholder="Search tasks..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
 
           <select
-            className="border rounded-2xl p-4 w-full md:w-56 focus:ring-2 focus:ring-indigo-400 outline-none transition"
+            className="border rounded-xl p-3 text-sm md:w-48 focus:ring-2 focus:ring-indigo-400 outline-none"
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
           >
@@ -192,18 +192,18 @@ function Dashboard() {
         </div>
 
         {/* TASK LIST */}
-        <h2 className="text-3xl font-semibold mb-10">
+        <h2 className="text-xl font-semibold mb-6">
           Your Tasks
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {tasks.map((task) => (
             <div
               key={task._id}
-              className="bg-white rounded-3xl p-10 shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 relative min-h-[300px]"
+              className="bg-white rounded-2xl p-6 shadow hover:shadow-lg transition relative min-h-[220px]"
             >
               <div
-                className={`absolute top-0 left-0 w-full h-1 rounded-t-3xl p-1 ${
+                className={`absolute top-0 left-0 w-full h-1 rounded-t-2xl ${
                   task.status === "completed"
                     ? "bg-emerald-500"
                     : "bg-amber-400"
@@ -213,29 +213,27 @@ function Dashboard() {
               {editTaskId === task._id ? (
                 <>
                   <input
-                    className="border rounded-xl p-4 w-full mb-4"
+                    className="border rounded-lg p-3 w-full mb-3 text-sm"
                     value={editTitle}
                     onChange={(e) => setEditTitle(e.target.value)}
                   />
                   <textarea
-                    className="border rounded-xl p-4 w-full mb-5"
+                    className="border rounded-lg p-3 w-full mb-4 text-sm"
                     rows={3}
                     value={editDescription}
-                    onChange={(e) =>
-                      setEditDescription(e.target.value)
-                    }
+                    onChange={(e) => setEditDescription(e.target.value)}
                   />
 
-                  <div className="flex gap-4">
+                  <div className="flex gap-3">
                     <button
                       onClick={() => saveEdit(task._id)}
-                      className="bg-indigo-600 text-white px-6 py-2 rounded-full hover:scale-105 transition"
+                      className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm"
                     >
                       Save
                     </button>
                     <button
                       onClick={cancelEdit}
-                      className="bg-gray-300 px-6 py-2 rounded-full hover:scale-105 transition"
+                      className="bg-gray-300 px-4 py-2 rounded-lg text-sm"
                     >
                       Cancel
                     </button>
@@ -243,17 +241,17 @@ function Dashboard() {
                 </>
               ) : (
                 <>
-                  <h3 className="font-semibold text-2xl text-gray-800">
+                  <h3 className="font-semibold text-lg text-gray-800">
                     {task.title}
                   </h3>
 
-                  <p className="text-base text-gray-600 mt-5 leading-relaxed">
+                  <p className="text-sm text-gray-600 mt-2">
                     {task.description}
                   </p>
 
-                  <div className="mt-10 flex justify-between items-center">
+                  <div className="mt-6 flex justify-between items-center">
                     <span
-                      className={`text-sm font-semibold px-5 py-2 rounded-full ${
+                      className={`text-xs font-semibold px-3 py-1 rounded-full ${
                         task.status === "completed"
                           ? "bg-emerald-100 text-emerald-700"
                           : "bg-amber-100 text-amber-700"
@@ -262,28 +260,24 @@ function Dashboard() {
                       {task.status}
                     </span>
 
-                    <div className="flex gap-3">
+                    <div className="flex gap-2">
                       {task.status === "pending" && (
                         <button
-                          onClick={() =>
-                            handleMarkComplete(task._id)
-                          }
-                          className="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2 rounded-full transition"
+                          onClick={() => handleMarkComplete(task._id)}
+                          className="bg-emerald-500 text-white px-3 py-1.5 rounded-lg text-xs"
                         >
                           Complete
                         </button>
                       )}
                       <button
                         onClick={() => startEdit(task)}
-                        className="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-2 rounded-full transition"
+                        className="bg-indigo-500 text-white px-3 py-1.5 rounded-lg text-xs"
                       >
                         Edit
                       </button>
                       <button
-                        onClick={() =>
-                          handleDeleteTask(task._id)
-                        }
-                        className="bg-rose-500 hover:bg-rose-600 text-white px-5 py-2 rounded-full transition"
+                        onClick={() => handleDeleteTask(task._id)}
+                        className="bg-rose-500 text-white px-3 py-1.5 rounded-lg text-xs"
                       >
                         Delete
                       </button>
